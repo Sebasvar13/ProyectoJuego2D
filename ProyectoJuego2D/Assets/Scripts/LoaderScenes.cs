@@ -3,13 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class LoaderScenes : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -20,18 +18,27 @@ public class LoaderScenes : MonoBehaviour
         SceneManager.LoadScene(nameScene);
     }
 
-    
+    // Método específico para la bandera
     public void LoadScene2()
     {
         SceneManager.LoadScene("Scene 2");
     }
 
-    // Trigger bandera
+    // Trigger para objetos específicos como la bandera
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            LoadScene2();
+            // Mostrar panel de resultados en lugar de cambiar de escena
+            if (PanelResultados.Instance != null)
+            {
+                PanelResultados.Instance.MostrarResultados();
+            }
+            else
+            {
+                // Si no hay panel, cargar la siguiente escena como antes
+                LoadScene2();
+            }
         }
     }
 }

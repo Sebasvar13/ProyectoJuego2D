@@ -4,17 +4,14 @@ public class CollectorItem : MonoBehaviour
 {
     public enum ItemType { Apple, Pineapple }
 
-    
     public ItemType type = ItemType.Apple;
     public int itemValue = 1;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -27,9 +24,21 @@ public class CollectorItem : MonoBehaviour
         switch (type)
         {
             case ItemType.Apple:
-                GameManager.Instance.TotalApple(itemValue); break;
+                GameManager.Instance.TotalApple(itemValue);
+                // Verificar que AudioManager exista antes de usarlo
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlaySonidoManzana();
+                }
+                break;
             case ItemType.Pineapple:
-                GameManager.Instance.TotalPineapple(itemValue); break;
+                GameManager.Instance.TotalPineapple(itemValue);
+                // Verificar que AudioManager exista antes de usarlo
+                if (AudioManager.Instance != null)
+                {
+                    AudioManager.Instance.PlaySonidoPina();
+                }
+                break;
         }
 
         Destroy(gameObject);
